@@ -1,0 +1,8 @@
+# Secure AI Gateway - Etape 10 : chiffrement en transit (III.6.3, III.7.4).
+# Certificat auto-signe (CA locale de Caddy) : suffisant pour la
+# demonstration du prototype ; un certificat d'une autorite reconnue
+# serait utilise pour la cible de production.
+localhost:443 {
+	tls internal
+	reverse_proxy gateway:8000
+}

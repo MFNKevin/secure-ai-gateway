@@ -1,0 +1,31 @@
+# --- Python ---
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# --- Secrets / configuration locale ---
+.env
+.env.*
+!.env.example
+
+# --- Donnees generees a l'execution ---
+# Journal d'audit : contient l'historique reel de tes tests (identifiants
+# d'agents, horodatages). Recree automatiquement au demarrage.
+audit.db
+*.db-journal
+# donnees.db (patients fictifs Faker) est volontairement versionnee :
+# elle est entierement fictive et necessaire au portail.
+# Pour l'exclure aussi, decommente la ligne suivante :
+# donnees.db
+
+# --- Outils / IDE / OS ---
+.claude/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,83 @@
+{
+  "realm": "secure-ai-gateway",
+  "enabled": true,
+  "sslRequired": "none",
+  "roles": {
+    "realm": [
+      { "name": "uc_courrier", "description": "UC1 - redaction de courriers administratifs" },
+      { "name": "uc_synthese", "description": "UC2 - synthese de comptes rendus medicaux" },
+      { "name": "uc_procedures", "description": "UC3 - assistant de reponse aux procedures internes" },
+      { "name": "admin", "description": "Administration technique de la passerelle, sans acces au contenu des demandes" },
+      { "name": "auditeur", "description": "Lecture seule du journal d'audit (DPO / RSSI)" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "gateway-client",
+      "enabled": true,
+      "publicClient": true,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "webOrigins": ["http://127.0.0.1:8000", "http://localhost:8000"]
+    }
+  ],
+  "users": [
+    {
+      "username": "a.rousseau",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "a.rousseau@chu-exemple.fr",
+      "requiredActions": [],
+      "firstName": "Agent",
+      "lastName": "Rousseau",
+      "credentials": [{ "type": "password", "value": "Passw0rd!", "temporary": false }],
+      "realmRoles": ["uc_courrier", "uc_procedures"]
+    },
+    {
+      "username": "l.girard",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "l.girard@chu-exemple.fr",
+      "requiredActions": [],
+      "firstName": "Soignant",
+      "lastName": "Girard",
+      "credentials": [{ "type": "password", "value": "Passw0rd!", "temporary": false }],
+      "realmRoles": ["uc_synthese", "uc_procedures"]
+    },
+    {
+      "username": "t.fontaine",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "t.fontaine@chu-exemple.fr",
+      "requiredActions": [],
+      "firstName": "Agent",
+      "lastName": "Fontaine",
+      "credentials": [{ "type": "password", "value": "Passw0rd!", "temporary": false }],
+      "realmRoles": ["uc_procedures"]
+    },
+    {
+      "username": "n.lemoine",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "n.lemoine@chu-exemple.fr",
+      "requiredActions": [],
+      "firstName": "Admin",
+      "lastName": "Lemoine",
+      "credentials": [{ "type": "password", "value": "Passw0rd!", "temporary": false }],
+      "realmRoles": ["admin"]
+    },
+    {
+      "username": "v.perrin",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "v.perrin@chu-exemple.fr",
+      "requiredActions": [],
+      "firstName": "DPO",
+      "lastName": "Perrin",
+      "credentials": [{ "type": "password", "value": "Passw0rd!", "temporary": false }],
+      "realmRoles": ["auditeur"]
+    }
+  ]
+}

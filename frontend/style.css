@@ -1,0 +1,119 @@
+:root {
+  --bleu: #1d4d6b;
+  --bleu-clair: #e8f1f6;
+  --rouge: #a5313f;
+  --gris: #666;
+  --bordure: #d0d7dc;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  color: #1a1a1a;
+  background: #fafbfc;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid var(--bleu);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+h1 { color: var(--bleu); font-size: 1.4rem; margin: 0; }
+
+#zone-identite { font-size: 0.9rem; color: var(--gris); }
+#zone-identite button {
+  margin-left: 0.75rem; background: none; border: 1px solid var(--bordure);
+  border-radius: 4px; padding: 0.2rem 0.6rem; cursor: pointer;
+}
+
+form { display: flex; flex-direction: column; gap: 0.9rem; }
+
+label { display: flex; flex-direction: column; gap: 0.3rem; font-weight: 600; font-size: 0.9rem; }
+
+input, select, textarea {
+  font-family: inherit; font-size: 1rem; padding: 0.5rem;
+  border: 1px solid var(--bordure); border-radius: 6px;
+}
+
+button {
+  background: var(--bleu); color: white; border: none; border-radius: 6px;
+  padding: 0.6rem 1rem; font-size: 1rem; cursor: pointer; width: fit-content;
+}
+button:hover { opacity: 0.9; }
+
+.aide { color: var(--gris); font-size: 0.85rem; }
+#liste-resultats-patients {
+  list-style: none; margin: 0.3rem 0 0; padding: 0; max-height: 160px;
+  overflow-y: auto; border: 1px solid var(--bordure); border-radius: 6px;
+}
+#liste-resultats-patients li {
+  padding: 0.4rem 0.6rem; cursor: pointer; border-bottom: 1px solid var(--bordure);
+}
+#liste-resultats-patients li:last-child { border-bottom: none; }
+#liste-resultats-patients li:hover { background: var(--bleu-clair); }
+
+.explication {
+  font-size: 0.88rem; color: #2b2b2b; background: var(--bleu-clair);
+  padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 0; line-height: 1.5;
+}
+.explication h3 { margin: 0 0 0.4rem; color: var(--bleu); font-size: 1rem; }
+.explication .badge-role {
+  display: inline-block; background: var(--bleu); color: white; font-weight: 600;
+  font-size: 0.75rem; padding: 0.1rem 0.5rem; border-radius: 999px; margin-bottom: 0.5rem;
+}
+
+#zone-exemples { margin: 0.9rem 0; }
+#boutons-exemples { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.4rem; }
+.bouton-exemple {
+  background: white; color: #2b2b2b; border: 1px solid var(--bordure);
+  border-radius: 999px; padding: 0.35rem 0.8rem; font-size: 0.82rem;
+  cursor: pointer; text-align: left;
+}
+.bouton-exemple:hover { border-color: var(--bleu); }
+.bouton-exemple.attendu-refus { border-color: #d9a5ab; color: #7a1f2a; }
+.bouton-exemple.attendu-refus:hover { border-color: var(--rouge); }
+.bouton-exemple .etiquette { font-weight: 600; display: block; font-size: 0.72rem; opacity: 0.75; }
+.erreur { color: var(--rouge); font-weight: 600; }
+
+nav { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+.onglet {
+  background: none; color: var(--bleu); border: 1px solid var(--bleu);
+}
+.onglet.actif { background: var(--bleu); color: white; }
+
+#indicateur-attente { color: var(--gris); font-style: italic; }
+
+#zone-reponse {
+  margin-top: 1.5rem; padding: 1rem; background: var(--bleu-clair);
+  border-radius: 8px; border-left: 4px solid var(--bleu);
+}
+#zone-reponse h3 { margin-top: 0; }
+
+details { margin-top: 1rem; font-size: 0.85rem; }
+details code { word-break: break-all; }
+
+#zone-pipeline { margin-top: 1.25rem; border-top: 1px solid var(--bordure); padding-top: 1rem; }
+#zone-pipeline h4 { margin-bottom: 0.5rem; }
+#liste-etapes { padding-left: 1.2rem; font-size: 0.9rem; line-height: 1.6; }
+.avertissement {
+  font-size: 0.85rem; background: #fff8e6; border-left: 3px solid #c9902b;
+  padding: 0.5rem 0.75rem; margin: 0.6rem 0; border-radius: 4px;
+}
+.alerte {
+  font-size: 0.9rem; font-weight: 600; color: #7a1f2a; background: #fbe4e6;
+  border-left: 4px solid var(--rouge); padding: 0.6rem 0.85rem;
+  margin-bottom: 0.9rem; border-radius: 4px;
+}
+
+table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.85rem; }
+th, td { border: 1px solid var(--bordure); padding: 0.4rem 0.5rem; text-align: left; }
+th { background: var(--bleu-clair); }
+tr:nth-child(even) { background: #f5f7f8; }

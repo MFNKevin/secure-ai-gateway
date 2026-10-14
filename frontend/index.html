@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Secure AI Gateway - Portail agent</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Secure AI Gateway</h1>
+  <div id="zone-identite"></div>
+</header>
+
+<!-- Etape 9 : portail utilisateur (III.3.2). Ecran de connexion. -->
+<section id="ecran-connexion">
+  <h2>Connexion</h2>
+  <p class="aide">Compte de demonstration (voir keycloak/import/realm-secure-ai-gateway.json)</p>
+  <form id="formulaire-connexion">
+    <label>Identifiant<input type="text" id="champ-utilisateur" placeholder="ex. a.rousseau" required></label>
+    <label>Mot de passe<input type="password" id="champ-mdp" placeholder="Passw0rd!" required></label>
+    <button type="submit">Se connecter</button>
+  </form>
+  <p id="erreur-connexion" class="erreur"></p>
+</section>
+
+<!-- Ecran principal, visible une fois authentifie. -->
+<section id="ecran-principal" hidden>
+
+  <nav>
+    <button class="onglet" data-onglet="assistant">Assistant</button>
+    <button class="onglet" data-onglet="audit" id="onglet-audit" hidden>Journal d'audit</button>
+  </nav>
+
+  <div id="vue-assistant" class="vue">
+    <form id="formulaire-chat">
+      <label>Cas d'usage
+        <select id="champ-cas-usage">
+          <option value="UC1">UC1 - Courrier administratif</option>
+          <option value="UC2">UC2 - Synthese de compte rendu</option>
+          <option value="UC3">UC3 - Question sur une procedure interne</option>
+        </select>
+      </label>
+
+      <div id="zone-explication-uc" class="explication"></div>
+
+      <div id="zone-exemples">
+        <p class="aide">Exemples a essayer (cliquez pour remplir la demande) :</p>
+        <div id="boutons-exemples"></div>
+      </div>
+
+      <div id="zone-patient" hidden>
+        <label>Rechercher un patient (nom ou prenom)
+          <input type="text" id="champ-recherche-patient" placeholder="ex. Dupont" autocomplete="off">
+        </label>
+        <ul id="liste-resultats-patients"></ul>
+      </div>
+
+      <label>Demande
+        <textarea id="champ-invite" rows="4" placeholder="Redige une convocation pour Mme DUPONT Claire, nee le 12/03/1958..."></textarea>
+      </label>
+      <button type="submit">Envoyer</button>
+    </form>
+
+    <p id="indicateur-attente" hidden>Traitement en cours (peut prendre jusqu'a 2-3 minutes sur ce prototype)...</p>
+
+    <div id="zone-reponse" hidden>
+      <p id="zone-alerte-residuelle" class="alerte" hidden></p>
+      <h3>Reponse</h3>
+      <p id="texte-reponse"></p>
+
+      <div id="zone-sources" hidden>
+        <h4>Sources citees</h4>
+        <ul id="liste-sources"></ul>
+      </div>
+
+      <div id="zone-pipeline">
+        <h4>Comment cette reponse a ete produite</h4>
+        <ol id="liste-etapes"></ol>
+
+        <p class="avertissement">
+          &#9888; Le modele peut inventer des details (date, adresse, numero...)
+          absents de votre demande initiale : relisez toujours la reponse avant
+          tout usage reel.
+        </p>
+        <p class="avertissement">
+          &#128274; Aucune donnee personnelle n'est conservee par cette
+          passerelle. Le journal d'audit (SQLite) n'enregistre que des
+          metadonnees (agent, role, decision, nombre d'entites masquees,
+          empreinte SHA-256 du texte masque) - jamais le contenu.
+        </p>
+
+        <details>
+          <summary>Details bruts (texte envoye au modele, latences)</summary>
+          <ul>
+            <li>Texte masque envoye au modele : <code id="detail-invite-masquee"></code></li>
+            <li>Entites masquees : <span id="detail-entites"></span> (<span id="detail-entites-par-type"></span>)</li>
+            <li>Latence passerelle (controles, hors modele) : <span id="detail-latence-passerelle"></span> ms</li>
+            <li>Latence modele : <span id="detail-latence-modele"></span> ms</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+
+    <p id="erreur-chat" class="erreur"></p>
+  </div>
+
+  <div id="vue-audit" class="vue" hidden>
+    <button id="bouton-rafraichir-audit">Rafraichir</button>
+    <table id="table-audit">
+      <thead>
+        <tr>
+          <th>Horodatage</th><th>Agent</th><th>Cas d'usage</th>
+          <th>Decision</th><th>Motif</th><th>Entites masquees</th><th>Latence (ms)</th>
+        </tr>
+      </thead>
+      <tbody id="corps-table-audit"></tbody>
+    </table>
+  </div>
+
+</section>
+
+<script src="/app.js"></script>
+</body>
+</html>
